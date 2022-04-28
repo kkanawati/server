@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -17,10 +14,12 @@ import static javax.persistence.GenerationType.AUTO;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Server {
+
+
     @Id
-    @GeneratedValue (strategy = AUTO)
+    //@GeneratedValue (strategy = AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column (unique = true)
     @NotEmpty (message = "IP adress cannot be empty or null")
@@ -30,5 +29,14 @@ public class Server {
     private String type;
     private String imageUrl;
     private Status status;
+
+    public Server(String ipAdress, String name, String memory, String type, String imageUrl, Status status) {
+        this.ipAdress = ipAdress;
+        this.name = name;
+        this.memory = memory;
+        this.type = type;
+        this.imageUrl = imageUrl;
+        this.status = status;
+    }
 
 }
